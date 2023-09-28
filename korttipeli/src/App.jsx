@@ -1,9 +1,26 @@
 import './App.css'
 import Card from './components/Card'
+import {useState} from 'react'
+
+const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
+
+const createCards = index => ({
+    image: `http://placekitten.com/140/120?image=${index}`,
+    stats: [
+    { name: 'Looks', value: getRandomInt(1, 999) }, 
+    { name: 'Speed', value: getRandomInt(1, 999) },
+    {name: 'Weight', value: getRandomInt(1, 999) },
+  ],
+    id: crypto.randomUUID()
+})
+
 const playerCard = {
   image: "https://placekitten.com/120/100",
-  stats: [{ name: 'Looks', value: 10 },
-          {name: 'Speed', value: 9}]
+  stats: [
+    { name: 'Looks', value: getRandomInt(1, 999) }, 
+    { name: 'Speed', value: getRandomInt(1, 999) },
+    {name: 'Weight', value: getRandomInt(1, 999) },
+  ]
 
 }
 
@@ -19,30 +36,38 @@ const opponentCard = {
 
 export default function App() {
   
+  const[result, setResult] = useState('')
+
   function compareCards() {
+
+
     const playerStats = playerCard.stats[0];
     const opponentStats = opponentCard.stats[0];
-    let result = '';
 
     if (playerStats.value > opponentStats.value) {
-      result = 'win';
+      setResult('win')
     }
     else if (playerStats.value < opponentStats.value) {
-      result = 'loss';
-    }
+      setResult('loss')    }
     else {
-      result = 'draw';
+      setResult('draw')
     }
 
-    console.log(result)
   }
   
   return (
     <div>
-      <h1>Hello World</h1>
-      <Card card={playerCard} />
-      <Card card={opponentCard} />
-      <button type='button' onClick={compareCards}>Play</button>
+      <h1>Card Game</h1>
+      <div className='game'>
+        <Card card={playerCard} />
+        <div className='center-area'>
+          <p>{result || 'Press the button'}</p>
+          <button type='button' onClick={compareCards}>Play</button>
+        </div>
+        <Card card={opponentCard} />
+        
+      </div>
+      
     </div>
     
   );
