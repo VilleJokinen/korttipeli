@@ -1,6 +1,9 @@
 
 export default function Card({card}){
-    return(
+    if(!card) return <div className="card" />;
+    
+
+    return (
         <div className="card">
             <img src={card.image} />
             <ul className="stat-list">
