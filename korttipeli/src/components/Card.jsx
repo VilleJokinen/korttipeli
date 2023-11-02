@@ -4,7 +4,7 @@ export default function Card({card}){
     
 
     return (
-        <div className="card">
+        <div className="card back">
             <img src={card.image} />
             <ul className="stat-list">
                 {card.stats.map((stat, index) => (
