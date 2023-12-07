@@ -2,7 +2,9 @@ import React from 'react'
 import './App.css'
 import Home from './components/Koti'
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
-import CardGame from './components/CardGame'
+import CardGame from './components/cardgame/CardGame'
+import Breakout from './components/breakout/Breakout'
+
 export default function App() {
 
 
@@ -17,6 +19,9 @@ export default function App() {
             <li>
               <Link to="/cardgame">Korttipeli</Link>
             </li>
+            <li>
+              <Link to="/breakout">Breakout</Link>
+            </li>
           </ul>
         </nav>
       </div>
@@ -25,6 +30,7 @@ export default function App() {
 
         <Route path="/" element={<Home />}></Route>
         <Route path="/cardgame" element={<CardGame />}></Route>
+        <Route path="/breakout" element={<Breakout />}></Route>
       </Routes>
 
     </Router>

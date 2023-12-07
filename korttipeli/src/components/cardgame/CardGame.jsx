@@ -1,4 +1,3 @@
-import '../App.css'
 import PlayButton from './PlayButton';
 import Card from './Card'
 import {useState} from 'react'
