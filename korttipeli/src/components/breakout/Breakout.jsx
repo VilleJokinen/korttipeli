@@ -2,8 +2,11 @@ import WallCollision from "./WallCollision";
 import React, {useEffect, useRef} from "react"
 import { BallMovement } from "./BallMovement";
 import data from "./data"
+import Paddle from "./Paddle"
+import PaddleHit from "./PaddleHit";
 
-let{ballObj} = data;
+
+let{ballObj,paddleProps} = data;
 
 export default function Breakout() {
     const canvasRef = useRef(null)
@@ -16,6 +19,8 @@ export default function Breakout() {
             //ctx.fillRect(10, 10, 150, 100);
             BallMovement(ctx,ballObj)        
             WallCollision(ballObj, canvas)
+            Paddle(ctx,canvas,paddleProps)
+            PaddleHit(ballObj,paddleProps)
             requestAnimationFrame(render);
         }
         render();
@@ -25,7 +30,9 @@ export default function Breakout() {
 
     return (
         
-        <canvas id="canvas" ref={canvasRef} height="500px" width="800px" />
+        <canvas id="canvas" ref={canvasRef} 
+        onMouseMove={(event)=> paddleProps.x = event.clientX - paddleProps.width/2-10 } 
+        height="500px" width={window.innerWidth-20} />
         
     )
 }
